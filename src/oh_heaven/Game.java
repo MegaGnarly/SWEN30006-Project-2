@@ -249,7 +249,7 @@ public class Game extends CardGame{
         Hand trick;
         int winner;
         Card winningCard;
-        Game.Suit lead;
+        Game.Suit lead = null;
         int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
         initBids(trumps, nextPlayer);
         // initScore();
@@ -271,13 +271,13 @@ public class Game extends CardGame{
 //                players.get(nextPlayer).getHand().setTouchEnabled(true);
                 setStatus("Player "+nextPlayer+" double-click on card to lead");
 //                    while (null == selected) delay(100);
-                selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand());
+                selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand(), lead, trumps);
             }
             else {
                 setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
 //                selected = randomCard(players.get(nextPlayer).getHand());
-                selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand());
+                selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand(), lead, trumps);
             }
             System.out.println(selected);
             // Lead with selected card
@@ -307,13 +307,13 @@ public class Game extends CardGame{
 //                    players.get(nextPlayer).getHand().setTouchEnabled(true);
                     setStatus("Player "+nextPlayer+" double-click on card to lead");
 //                    while (null == selected) delay(100);
-                    selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand());
+                    selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand(), lead, trumps);
                 }
                 else {
                     setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
 //                    selected = randomCard(players.get(nextPlayer).getHand());
-                    selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand());
+                    selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand(), lead, trumps);
                 }
                 // Follow with selected card
                 trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));

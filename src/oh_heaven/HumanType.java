@@ -15,7 +15,7 @@ public class HumanType implements Type {
     }
 
     @Override
-    public Card play(Hand hand) {
+    public Card play(Hand hand, Game.Suit lead, Game.Suit trump) {
         selected = null;
         hand.setTouchEnabled(true);
         while (null == selected) delay(100);
