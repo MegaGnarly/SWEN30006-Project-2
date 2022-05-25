@@ -46,15 +46,19 @@ public class Game extends CardGame{
 
     private void dealingOut(Hand[] hands, int nbPlayers, int nbCardsPerPlayer) {
         Hand pack = deck.toHand(false);
+        Hand pack2 = deck.toHand(false);
         // pack.setView(Oh_Heaven.this, new RowLayout(hideLocation, 0));
         for (int i = 0; i < nbCardsPerPlayer; i++) {
             for (int j=0; j < nbPlayers; j++) {
                 if (pack.isEmpty()) return;
+                if (pack2.isEmpty()) return;
                 Card dealt = randomCard(pack);
+                Card dealt2 = randomCard(pack2);
                 // System.out.println("Cards = " + dealt);
                 dealt.removeFromHand(false);
+                dealt2.removeFromHand(false);
                 hands[j].insert(dealt, false);
-                players.get(j).getHand().insert(dealt, false);
+                players.get(j).getHand().insert(dealt2, false);
                 // dealt.transfer(hands[j], true);
             }
         }
@@ -108,13 +112,14 @@ public class Game extends CardGame{
             String type = properties.getProperty("players."+i);
             players.add(new Player(type, deck));
         }
-        dealingOut(hands, nbPlayers, nbStartCards);
+//        dealingOut(hands, nbPlayers, nbStartCards);
     }
 
     private void initScore() {
         for (int i = 0; i < nbPlayers; i++) {
             // scores[i] = 0;
-            String text = "[" + scores[i] + "]" + tricks[i] + "/" + bids[i];
+//            String text = "[" + scores[i] + "]" + tricks[i] + "/" + bids[i];
+            String text = "[" + players.get(i).getScore() + "]" + players.get(i).getTricks() + "/" + players.get(i).getBid();
             scoreActors[i] = new TextActor(text, Color.WHITE, bgColor, bigFont);
             addActor(scoreActors[i], scoreLocations[i]);
         }
@@ -122,7 +127,8 @@ public class Game extends CardGame{
 
     private void updateScore(int player) {
         removeActor(scoreActors[player]);
-        String text = "[" + scores[player] + "]" + tricks[player] + "/" + bids[player];
+//        String text = "[" + scores[player] + "]" + tricks[player] + "/" + bids[player];
+        String text = "[" + players.get(player).getScore() + "]" + players.get(player).getTricks() + "/" + players.get(player).getBid();
         scoreActors[player] = new TextActor(text, Color.WHITE, bgColor, bigFont);
         addActor(scoreActors[player], scoreLocations[player]);
     }
@@ -134,10 +140,10 @@ public class Game extends CardGame{
     }
 
     private void updateScores() {
-        for (int i = 0; i < nbPlayers; i++) {
-            scores[i] += tricks[i];
-            if (tricks[i] == bids[i]) scores[i] += madeBidBonus;
-        }
+//        for (int i = 0; i < nbPlayers; i++) {
+//            scores[i] += tricks[i];
+//            if (tricks[i] == bids[i]) scores[i] += madeBidBonus;
+//        }
         for (Player player: players){
             player.setScore(player.getScore()+player.getTricks());
             if (player.getTricks() == player.getBid()){
@@ -153,20 +159,20 @@ public class Game extends CardGame{
     }
 
     private void initBids(Game.Suit trumps, int nextPlayer) {
-        int total = 0;
-        for (int i = nextPlayer; i < nextPlayer + nbPlayers; i++) {
-            int iP = i % nbPlayers;
-            bids[iP] = nbStartCards / 4 + random.nextInt(2);
-            total += bids[iP];
-        }
-        if (total == nbStartCards) {  // Force last bid so not every bid possible
-            int iP = (nextPlayer + nbPlayers) % nbPlayers;
-            if (bids[iP] == 0) {
-                bids[iP] = 1;
-            } else {
-                bids[iP] += random.nextBoolean() ? -1 : 1;
-            }
-        }
+//        int total = 0;
+//        for (int i = nextPlayer; i < nextPlayer + nbPlayers; i++) {
+//            int iP = i % nbPlayers;
+//            bids[iP] = nbStartCards / 4 + random.nextInt(2);
+//            total += bids[iP];
+//        }
+//        if (total == nbStartCards) {  // Force last bid so not every bid possible
+//            int iP = (nextPlayer + nbPlayers) % nbPlayers;
+//            if (bids[iP] == 0) {
+//                bids[iP] = 1;
+//            } else {
+//                bids[iP] += random.nextBoolean() ? -1 : 1;
+//            }
+//        }
         int tot = 0;
         for (Player player: players){
             player.setBid(nbStartCards / 4 + random.nextInt(2));
@@ -195,20 +201,20 @@ public class Game extends CardGame{
         }
         dealingOut(hands, nbPlayers, nbStartCards);
         for (int i = 0; i < nbPlayers; i++) {
-            hands[i].sort(Hand.SortType.SUITPRIORITY, true);
+//            hands[i].sort(Hand.SortType.SUITPRIORITY, true);
             players.get(i).getHand().sort(Hand.SortType.SUITPRIORITY, true);
         }
         // Set up human player for interaction
-        CardListener cardListener = new CardAdapter()  // Human Player plays card
-        {
-            public void leftDoubleClicked(Card card) { selected = card; hands[0].setTouchEnabled(false); }
-        };
-        hands[0].addCardListener(cardListener);
+//        CardListener cardListener = new CardAdapter()  // Human Player plays card
+//        {
+//            public void leftDoubleClicked(Card card) { selected = card; hands[0].setTouchEnabled(false); }
+//        };
+//        hands[0].addCardListener(cardListener);
 
         for (int i = 0; i < nbPlayers; i++) {
             if (players.get(i).getType() instanceof HumanType){
                 Hand hand = players.get(i).getHand();
-                cardListener = new CardAdapter()  // Human Player plays card
+                CardListener cardListener = new CardAdapter()  // Human Player plays card
                 {
                     public void leftDoubleClicked(Card card) { selected = card; hand.setTouchEnabled(false); }
                 };
@@ -222,11 +228,11 @@ public class Game extends CardGame{
             layouts[i] = new RowLayout(handLocations[i], handWidth);
             layouts[i].setRotationAngle(90 * i);
             // layouts[i].setStepDelay(10);
-            hands[i].setView(this, layouts[i]);
+//            hands[i].setView(this, layouts[i]);
             players.get(i).getHand().setView(this, layouts[i]);
-            hands[i].setTargetArea(new TargetArea(trickLocation));
+//            hands[i].setTargetArea(new TargetArea(trickLocation));
             players.get(i).getHand().setTargetArea(new TargetArea(trickLocation));
-            hands[i].draw();
+//            hands[i].draw();
             players.get(i).getHand().draw();
         }
 //	    for (int i = 1; i < nbPlayers; i++) // This code can be used to visually hide the cards in a hand (make them face down)
@@ -252,15 +258,15 @@ public class Game extends CardGame{
             trick = new Hand(deck);
             selected = null;
             // if (false) {
-            if (0 == nextPlayer) {  // Select lead depending on player type
-                hands[0].setTouchEnabled(true);
-                setStatus("Player 0 double-click on card to lead.");
-                while (null == selected) delay(100);
-            } else {
-                setStatusText("Player " + nextPlayer + " thinking...");
-                delay(thinkingTime);
-                selected = randomCard(hands[nextPlayer]);
-            }
+//            if (0 == nextPlayer) {  // Select lead depending on player type
+//                hands[0].setTouchEnabled(true);
+//                setStatus("Player 0 double-click on card to lead.");
+//                while (null == selected) delay(100);
+//            } else {
+//                setStatusText("Player " + nextPlayer + " thinking...");
+//                delay(thinkingTime);
+//                selected = randomCard(hands[nextPlayer]);
+//            }
             if (players.get(nextPlayer).getType() instanceof HumanType){
                 players.get(nextPlayer).getHand().setTouchEnabled(true);
                 setStatus("Player "+nextPlayer+" double-click on card to lead");
@@ -269,8 +275,9 @@ public class Game extends CardGame{
             else {
                 setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
-                selected = randomCard(hands[nextPlayer]);
+                selected = randomCard(players.get(nextPlayer).getHand());
             }
+            System.out.println(selected);
             // Lead with selected card
             trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
             trick.draw();
@@ -285,14 +292,24 @@ public class Game extends CardGame{
                 if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
                 selected = null;
                 // if (false) {
-                if (0 == nextPlayer) {
-                    hands[0].setTouchEnabled(true);
-                    setStatus("Player 0 double-click on card to follow.");
+//                if (0 == nextPlayer) {
+//                    hands[0].setTouchEnabled(true);
+//                    setStatus("Player 0 double-click on card to follow.");
+//                    while (null == selected) delay(100);
+//                } else {
+//                    setStatusText("Player " + nextPlayer + " thinking...");
+//                    delay(thinkingTime);
+//                    selected = randomCard(hands[nextPlayer]);
+//                }
+                if (players.get(nextPlayer).getType() instanceof HumanType){
+                    players.get(nextPlayer).getHand().setTouchEnabled(true);
+                    setStatus("Player "+nextPlayer+" double-click on card to lead");
                     while (null == selected) delay(100);
-                } else {
+                }
+                else {
                     setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
-                    selected = randomCard(hands[nextPlayer]);
+                    selected = randomCard(players.get(nextPlayer).getHand());
                 }
                 // Follow with selected card
                 trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
@@ -334,6 +351,7 @@ public class Game extends CardGame{
             nextPlayer = winner;
             setStatusText("Player " + nextPlayer + " wins trick.");
             tricks[nextPlayer]++;
+            players.get(nextPlayer).setTricks(players.get(nextPlayer).getTricks()+1);
             updateScore(nextPlayer);
         }
         removeActor(trumpsActor);
