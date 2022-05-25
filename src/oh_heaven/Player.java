@@ -2,7 +2,6 @@ package oh_heaven;
 
 import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
-import java.util.*;
 
 public class Player extends Actor{
     private int score = 0;
@@ -24,7 +23,7 @@ public class Player extends Actor{
             this.type = new SmartType();
         }
         else if (type.equals("human")){
-            this.type = new HumanType();
+            this.type = new HumanType(this.hand);
         }
         else{
             this.type = new RandomType();

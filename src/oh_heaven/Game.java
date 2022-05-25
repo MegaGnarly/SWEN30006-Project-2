@@ -211,16 +211,16 @@ public class Game extends CardGame{
 //        };
 //        hands[0].addCardListener(cardListener);
 
-        for (int i = 0; i < nbPlayers; i++) {
-            if (players.get(i).getType() instanceof HumanType){
-                Hand hand = players.get(i).getHand();
-                CardListener cardListener = new CardAdapter()  // Human Player plays card
-                {
-                    public void leftDoubleClicked(Card card) { selected = card; hand.setTouchEnabled(false); }
-                };
-                players.get(i).getHand().addCardListener(cardListener);
-            }
-        }
+//        for (int i = 0; i < nbPlayers; i++) {
+//            if (players.get(i).getType() instanceof HumanType){
+//                Hand hand = players.get(i).getHand();
+//                CardListener cardListener = new CardAdapter()  // Human Player plays card
+//                {
+//                    public void leftDoubleClicked(Card card) { selected = card; hand.setTouchEnabled(false); }
+//                };
+//                players.get(i).getHand().addCardListener(cardListener);
+//            }
+//        }
 
         // graphics
         RowLayout[] layouts = new RowLayout[nbPlayers];
@@ -268,14 +268,16 @@ public class Game extends CardGame{
 //                selected = randomCard(hands[nextPlayer]);
 //            }
             if (players.get(nextPlayer).getType() instanceof HumanType){
-                players.get(nextPlayer).getHand().setTouchEnabled(true);
+//                players.get(nextPlayer).getHand().setTouchEnabled(true);
                 setStatus("Player "+nextPlayer+" double-click on card to lead");
-                while (null == selected) delay(100);
+//                    while (null == selected) delay(100);
+                selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand());
             }
             else {
                 setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
-                selected = randomCard(players.get(nextPlayer).getHand());
+//                selected = randomCard(players.get(nextPlayer).getHand());
+                selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand());
             }
             System.out.println(selected);
             // Lead with selected card
@@ -302,14 +304,16 @@ public class Game extends CardGame{
 //                    selected = randomCard(hands[nextPlayer]);
 //                }
                 if (players.get(nextPlayer).getType() instanceof HumanType){
-                    players.get(nextPlayer).getHand().setTouchEnabled(true);
+//                    players.get(nextPlayer).getHand().setTouchEnabled(true);
                     setStatus("Player "+nextPlayer+" double-click on card to lead");
-                    while (null == selected) delay(100);
+//                    while (null == selected) delay(100);
+                    selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand());
                 }
                 else {
                     setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
-                    selected = randomCard(players.get(nextPlayer).getHand());
+//                    selected = randomCard(players.get(nextPlayer).getHand());
+                    selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand());
                 }
                 // Follow with selected card
                 trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
