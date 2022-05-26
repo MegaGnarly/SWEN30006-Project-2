@@ -326,7 +326,6 @@ public class Game extends CardGame{
                 // Check: Following card must follow suit if possible
                 if (selected.getSuit() != lead && players.get(nextPlayer).getHand().getNumberOfCardsWithSuit(lead) > 0) {
                     // Rule violation
-                    System.out.println(hands[nextPlayer].getNumberOfCardsWithSuit(lead));
                     String violation = "Follow rule broken by player " + nextPlayer + " attempting to play " + selected;
                     System.out.println(violation);
                     if (enforceRules)
