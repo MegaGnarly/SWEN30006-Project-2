@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="df8c1bd3-0685-45a3-b134-0f80400cab90" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/BrokeRuleException.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/BrokeRuleException.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/Game$Rank.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/Game$Rank.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/Game$Suit.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/Game$Suit.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/Game.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/Game.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/HumanType.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/HumanType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/LegalType.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/LegalType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/Oh_Heaven.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/Oh_Heaven.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/RandomType.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/RandomType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/SmartType.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/SmartType.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/oh_heaven/Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/oh_heaven/Type.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bin/utility/PropertiesLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/bin/utility/PropertiesLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/properties/runmode.properties" beforeDir="false" afterPath="$PROJECT_DIR$/properties/runmode.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/oh_heaven/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/oh_heaven/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/oh_heaven/LegalType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/oh_heaven/LegalType.java" afterDir="false" />
-    </list>
+    <list default="true" id="df8c1bd3-0685-45a3-b134-0f80400cab90" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
