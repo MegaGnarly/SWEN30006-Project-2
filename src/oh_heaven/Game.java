@@ -255,6 +255,7 @@ public class Game extends CardGame{
         // initScore();
         for (int i = 0; i < nbPlayers; i++) updateScore(i);
         for (int i = 0; i < nbStartCards; i++) {
+            lead = null;
             trick = new Hand(deck);
             selected = null;
             // if (false) {
@@ -285,7 +286,9 @@ public class Game extends CardGame{
             trick.draw();
             selected.setVerso(false);
             // No restrictions on the card being lead
+            System.out.println(lead);
             lead = (Game.Suit) selected.getSuit();
+            System.out.println(lead);
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
             winner = nextPlayer;
             winningCard = selected;
@@ -315,12 +318,13 @@ public class Game extends CardGame{
 //                    selected = randomCard(players.get(nextPlayer).getHand());
                     selected = players.get(nextPlayer).getType().play(players.get(nextPlayer).getHand(), lead, trumps);
                 }
+
                 // Follow with selected card
                 trick.setView(this, new RowLayout(trickLocation, (trick.getNumberOfCards()+2)*trickWidth));
                 trick.draw();
                 selected.setVerso(false);  // In case it is upside down
                 // Check: Following card must follow suit if possible
-                if (selected.getSuit() != lead && hands[nextPlayer].getNumberOfCardsWithSuit(lead) > 0) {
+                if (selected.getSuit() != lead && players.get(nextPlayer).getHand().getNumberOfCardsWithSuit(lead) > 0) {
                     // Rule violation
                     String violation = "Follow rule broken by player " + nextPlayer + " attempting to play " + selected;
                     System.out.println(violation);
