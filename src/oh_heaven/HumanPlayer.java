@@ -21,7 +21,7 @@ public class HumanPlayer implements PlayerT{
     }
 
     @Override
-    public Card PlayCard(Deck deck, Game.Suit lead, Game.Suit trump) {
+    public Card PlayCard(Deck deck, Game.Suit lead, Game.Suit trump, Card winningCard) {
         selected = null;
         hand.setTouchEnabled(true);
         while (null == selected) delay(100);

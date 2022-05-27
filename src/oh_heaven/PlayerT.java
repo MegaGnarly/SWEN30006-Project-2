@@ -4,7 +4,7 @@ import ch.aplu.jcardgame.*;
 import ch.aplu.jgamegrid.*;
 
 public interface PlayerT{
-    public Card PlayCard(Deck deck, Game.Suit lead, Game.Suit trump);
+    public Card PlayCard(Deck deck, Game.Suit lead, Game.Suit trump, Card winningCard);
 
     public int getScore();
 

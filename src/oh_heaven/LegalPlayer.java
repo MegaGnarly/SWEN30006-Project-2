@@ -15,7 +15,7 @@ public class LegalPlayer implements PlayerT{
     }
 
     @Override
-    public Card PlayCard(Deck deck, Game.Suit lead, Game.Suit trump) {
+    public Card PlayCard(Deck deck, Game.Suit lead, Game.Suit trump, Card winningCard) {
         int x;
         if(lead == null){
             x = Game.random.nextInt(hand.getNumberOfCards());

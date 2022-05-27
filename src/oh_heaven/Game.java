@@ -59,7 +59,7 @@ public class Game extends CardGame{
         }
     }
 
-    public boolean rankGreater(Card card1, Card card2) {
+    public static boolean rankGreater(Card card1, Card card2) {
         return card1.getRankId() < card2.getRankId(); // Warning: Reverse rank order of cards (see comment on enum)
     }
 
@@ -200,6 +200,7 @@ public class Game extends CardGame{
         int winner;
         Card winningCard;
         Game.Suit lead = null;
+        winningCard = null;
         int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
         initBids(trumps, nextPlayer);
         // initScore();
@@ -210,12 +211,12 @@ public class Game extends CardGame{
             selected = null;
             if (players.get(nextPlayer) instanceof HumanPlayer){
                 setStatus("Player "+nextPlayer+" double-click on card to lead");
-                selected = players.get(nextPlayer).PlayCard(deck, lead, trumps);
+                selected = players.get(nextPlayer).PlayCard(deck, lead, trumps, winningCard);
             }
             else {
                 setStatusText("Player " + nextPlayer + " thinking...");
                 delay(thinkingTime);
-                selected = players.get(nextPlayer).PlayCard(deck, lead, trumps);
+                selected = players.get(nextPlayer).PlayCard(deck, lead, trumps, winningCard);
             }
 
             System.out.println(selected);
@@ -236,12 +237,13 @@ public class Game extends CardGame{
                 selected = null;
                 if (players.get(nextPlayer) instanceof HumanPlayer){
                     setStatus("Player "+nextPlayer+" double-click on card to lead");
-                    selected = players.get(nextPlayer).PlayCard(deck, lead, trumps);
+                    selected = players.get(nextPlayer).PlayCard(deck, lead, trumps, winningCard);
                 }
                 else {
                     setStatusText("Player " + nextPlayer + " thinking...");
                     delay(thinkingTime);
-                    selected = players.get(nextPlayer).PlayCard(deck, lead, trumps);
+                    System.out.println(players.get(nextPlayer));
+                    selected = players.get(nextPlayer).PlayCard(deck, lead, trumps, winningCard);
                 }
 
                 // Follow with selected card
