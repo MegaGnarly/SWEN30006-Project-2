@@ -5,10 +5,10 @@ import ch.aplu.jcardgame.*;
 import static ch.aplu.jgamegrid.GameGrid.delay;
 
 public class HumanPlayer implements PlayerT{
-    int score = 0;
-    int tricks = 0;
-    int bid = 0;
-    Hand hand;
+    private int score = 0;
+    private int tricks = 0;
+    private int bid = 0;
+    private Hand hand;
     private Card selected;
 
     public HumanPlayer(Deck deck) {

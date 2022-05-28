@@ -5,10 +5,10 @@ import ch.aplu.jcardgame.Deck;
 import ch.aplu.jcardgame.Hand;
 
 public class SmartPlayer implements PlayerT{
-    int score = 0;
-    int tricks = 0;
-    int bid = 0;
-    Hand hand;
+    private int score = 0;
+    private int tricks = 0;
+    private int bid = 0;
+    private Hand hand;
 
     public SmartPlayer(Deck deck) {
         this.hand = new Hand(deck);

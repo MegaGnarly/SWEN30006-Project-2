@@ -166,15 +166,12 @@ public class Game{
                 selected = players.get(nextPlayer).PlayCard(deck, lead, trumps, winningCard);
             }
 
-            System.out.println(selected);
             // Lead with selected card
             trick.setView(graphics, new RowLayout(graphics.getTrickLocation(), (trick.getNumberOfCards()+2)*trickWidth));
             trick.draw();
             selected.setVerso(false);
             // No restrictions on the card being lead
-            System.out.println(lead);
             lead = (Game.Suit) selected.getSuit();
-            System.out.println(lead);
             selected.transfer(trick, true); // transfer to trick (includes graphic effect)
             winner = nextPlayer;
             winningCard = selected;
@@ -189,7 +186,6 @@ public class Game{
                 else {
                     graphics.setStatusText("Player " + nextPlayer + " thinking...");
                     graphics.delay(thinkingTime);
-                    System.out.println(players.get(nextPlayer));
                     selected = players.get(nextPlayer).PlayCard(deck, lead, trumps, winningCard);
                 }
 

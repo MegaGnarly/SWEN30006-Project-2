@@ -24,7 +24,6 @@ public class PropertiesLoader {
                     prop = new Properties();
                     prop.load(input);
                     propertiesFile = "properties/" + prop.getProperty("current_mode");
-                    System.out.println(propertiesFile);
                 } catch (Throwable var8) {
                     try {
                         input.close();
