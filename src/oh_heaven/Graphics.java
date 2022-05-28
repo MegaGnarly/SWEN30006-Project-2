@@ -6,7 +6,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Graphics extends CardGame{
-    private final String version = "1.0";
     final String[] trumpImage = {"bigspade.gif","bigheart.gif","bigdiamond.gif","bigclub.gif"};
     Font bigFont = new Font("Serif", Font.BOLD, 36);
     private final Location[] handLocations = {
@@ -26,9 +25,6 @@ public class Graphics extends CardGame{
     private final Actor[] scoreActors = {null, null, null, null };
     private final Location trickLocation = new Location(350, 350);
     private final Location textLocation = new Location(350, 450);
-
-
-
     private final Location hideLocation = new Location(-500, - 500);
     private final Location trumpsActorLocation = new Location(50, 50);
 
@@ -36,7 +32,7 @@ public class Graphics extends CardGame{
 
     public Graphics() {
         super(700, 700, 30);
-        setTitle("Oh_Heaven (V" + version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
+        setTitle("Oh_Heaven (V" + Game.version + ") Constructed for UofM SWEN30006 with JGameGrid (www.aplu.ch)");
         setStatusText("Initializing...");
     }
 

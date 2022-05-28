@@ -58,14 +58,14 @@ public class Game{
         return card1.getRankId() < card2.getRankId(); // Warning: Reverse rank order of cards (see comment on enum)
     }
 
-    private final String version = "1.0";
+    static final String version = "1.0";
     public final int nbPlayers = 4;
     public int nbStartCards;
     public int nbRounds;
     public final int madeBidBonus = 10;
     private final int trickWidth = 40;
     private final Deck deck = new Deck(Game.Suit.values(), Game.Rank.values(), "cover");
-
+    private Properties properties;
     private final int thinkingTime = 2000;
     private boolean enforceRules;
     Graphics graphics = new Graphics();
@@ -74,7 +74,7 @@ public class Game{
     private final ArrayList<PlayerT> players = new ArrayList<PlayerT>();
 
 
-    private void initPlayers(Properties properties) {
+    private void initPlayers() {
         for (int i = 0; i < nbPlayers; i++) {
             String type = properties.getProperty("players."+i);
             players.add(PlayerFactory.getPlayer(type, deck));
@@ -242,10 +242,11 @@ public class Game{
     {
         seed = Integer.parseInt(properties.getProperty("seed"));
         random = new Random(seed);
+        this.properties = properties;
         this.nbStartCards = Integer.parseInt(properties.getProperty("nbStartCards"));
         this.nbRounds = Integer.parseInt(properties.getProperty("rounds"));
         this.enforceRules = Boolean.parseBoolean(properties.getProperty("enforceRules"));
-        initPlayers(properties);
+        initPlayers();
         initScore();
         for (int i=0; i <nbRounds; i++) {
             initRound();
