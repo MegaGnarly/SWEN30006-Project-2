@@ -39,6 +39,7 @@ public class Game{
         return list.get(x);
     }
 
+    // deals out cards from beck into player hands
     private void dealingOut(int nbPlayers, int nbCardsPerPlayer) {
         Hand pack = deck.toHand(false);
         // pack.setView(Oh_Heaven.this, new RowLayout(hideLocation, 0));
@@ -73,7 +74,7 @@ public class Game{
 
     private final ArrayList<PlayerT> players = new ArrayList<PlayerT>();
 
-
+    // initiallises players using the player factory
     private void initPlayers() {
         for (int i = 0; i < nbPlayers; i++) {
             String type = properties.getProperty("players."+i);
@@ -81,6 +82,7 @@ public class Game{
         }
     }
 
+    // initiallises the score Actor via Graphics
     private void initScore() {
         for (int i = 0; i < nbPlayers; i++) {
             String text = "[" + players.get(i).getScore() + "]" + players.get(i).getTricks() + "/" + players.get(i).getBid();
@@ -88,11 +90,14 @@ public class Game{
         }
     }
 
+    // updates the score Actor via Graphics
     private void updateScore(int player) {
-        String text = "[" + players.get(player).getScore() + "]" + players.get(player).getTricks() + "/" + players.get(player).getBid();
+        String text = "[" + players.get(player).getScore() + "]" + players.get(player).getTricks() + "/" +
+                players.get(player).getBid();
         graphics.changeScore(text, player);
     }
 
+    // updates the score in individual players
     private void updateScores() {
         for (PlayerT player: players){
             player.setScore(player.getScore()+player.getTricks());
@@ -102,6 +107,7 @@ public class Game{
         }
     }
 
+    // initiallises each players bids through random, can be changed to implement properties
     private void initBids(Game.Suit trumps, int nextPlayer) {
         int total = 0;
         for (PlayerT player: players){
@@ -124,6 +130,7 @@ public class Game{
 
     private Card selected;
 
+    // deals out the cards and sorts them
     private void initRound() {
         dealingOut(nbPlayers, nbStartCards);
         for (int i = 0; i < nbPlayers; i++) {
@@ -149,13 +156,14 @@ public class Game{
         Game.Suit lead;
         winningCard = null;
         int nextPlayer = random.nextInt(nbPlayers); // randomly select player to lead for this round
-        initBids(trumps, nextPlayer);
+        initBids(trumps, nextPlayer); // initiallises bids for each player
         // initScore();
         for (int i = 0; i < nbPlayers; i++) updateScore(i);
         for (int i = 0; i < nbStartCards; i++) {
             lead = null;
             trick = new Hand(deck);
             selected = null;
+            // gets selected card based on Type of player, with only difference being status text
             if (players.get(nextPlayer) instanceof HumanPlayer){
                 graphics.setStatusText("Player "+nextPlayer+" double-click on card to lead");
                 selected = players.get(nextPlayer).PlayCard(deck, lead, trumps, winningCard);
@@ -179,6 +187,7 @@ public class Game{
             for (int j = 1; j < nbPlayers; j++) {
                 if (++nextPlayer >= nbPlayers) nextPlayer = 0;  // From last back to first
                 selected = null;
+                // gets selected card based on Type of player, with only difference being status text
                 if (players.get(nextPlayer) instanceof HumanPlayer){
                     graphics.setStatusText("Player "+nextPlayer+" double-click on card to lead");
                     selected = players.get(nextPlayer).PlayCard(deck, lead, trumps, winningCard);
@@ -238,6 +247,7 @@ public class Game{
     {
         seed = Integer.parseInt(properties.getProperty("seed"));
         random = new Random(seed);
+        // sets attributes based on properties
         this.properties = properties;
         this.nbStartCards = Integer.parseInt(properties.getProperty("nbStartCards"));
         this.nbRounds = Integer.parseInt(properties.getProperty("rounds"));

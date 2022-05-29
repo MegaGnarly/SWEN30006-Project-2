@@ -8,6 +8,7 @@ import java.util.Properties;
 @SuppressWarnings("serial")
 public class Oh_Heaven {
 
+	// entry point for the game
   public static void main(String[] args)
   {
 	// System.out.println("Working Directory = " + System.getProperty("user.dir"));
